@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card p-4 shadow-sm border-0 mx-auto">
+            <h2 class="mb-4 text-center text-primary">{{ title }}</h2>
+            <form method="POST">
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Tên phương pháp khoa học</label>
+                    <input type="text" name="title" class="form-control" placeholder="Ví dụ: Kỹ thuật Feynman, Pomodoro..." value="{{ tip.title if tip else '' }}" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Danh mục phân loại</label>
+                    <select name="category" class="form-select" required>
+                        <option value="Quản lý thời gian" {{ 'selected' if tip and tip.category == 'Quản lý thời gian' else '' }}>Quản lý thời gian</option>
+                        <option value="Ghi nhớ sâu" {{ 'selected' if tip and tip.category == 'Ghi nhớ sâu' else '' }}>Ghi nhớ sâu</option>
+                        <option value="Tập trung" {{ 'selected' if tip and tip.category == 'Tập trung' else '' }}>Tập trung</option>
+                    </select>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="form-label fw-bold">Các bước thực hiện chi tiết (Ý kiến giúp học tốt)</label>
+                    <textarea name="content" class="form-control" rows="8" placeholder="Bước 1:... &#10;Bước 2:..." required>{{ tip.content if tip else '' }}</textarea>
+                </div>
+                
+                <div class="d-flex justify-content-between">
+                    <a href="{{ url_for('index') }}" class="btn btn-secondary">Quay lại trang chủ</a>
+                    <button type="submit" class="btn btn-primary px-4">Xác nhận cập nhật</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
